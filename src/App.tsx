@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <div style={{ paddingBottom: "60px" /* space for nav */ }}>
+      <div style={{ paddingBottom: "4rem" /* space for nav */ }}>
         <AppRoutes />
       </div>
       <Navigation />

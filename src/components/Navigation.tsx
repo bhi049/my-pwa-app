@@ -1,30 +1,28 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FiList, FiCalendar, FiSettings } from "react-icons/fi";
+import styles from "../styles/Navigation.module.css";
 
 const Navigation: React.FC = () => {
   return (
-    <nav
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        display: "flex",
-        justifyContent: "space-around",
-        padding: "0.5rem 0",
-        background: "#f8f8f8",
-        borderTop: "1px solid #ccc",
-        zIndex: 100,
-      }}
-    >
-      <NavLink to="/" style={({ isActive }) => ({ color: isActive ? "blue" : "gray" })}>
-        📝 Tasks
+    <nav className={styles.nav}>
+      <NavLink to="/" className={({ isActive }) => isActive ? styles.active : ""}>
+        <div className={styles.tab}>
+          <FiList className={styles.icon} />
+          <span>Tasks</span>
+        </div>
       </NavLink>
-      <NavLink to="/calendar" style={({ isActive }) => ({ color: isActive ? "blue" : "gray" })}>
-        📅 Calendar
+      <NavLink to="/calendar" className={({ isActive }) => isActive ? styles.active : ""}>
+        <div className={styles.tab}>
+          <FiCalendar className={styles.icon} />
+          <span>Calendar</span>
+        </div>
       </NavLink>
-      <NavLink to="/settings" style={({ isActive }) => ({ color: isActive ? "blue" : "gray" })}>
-        ⚙️ Settings
+      <NavLink to="/settings" className={({ isActive }) => isActive ? styles.active : ""}>
+        <div className={styles.tab}>
+          <FiSettings className={styles.icon} />
+          <span>Settings</span>
+        </div>
       </NavLink>
     </nav>
   );
