@@ -1,11 +1,13 @@
 .card {
-  padding: 0.75rem;
-  margin-bottom: 0.5rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #ffffff;
   color: #000000;
-  border-left: 4px solid gray;
+  border-left: 5px solid gray;
 }
 
 .high {
@@ -18,4 +20,34 @@
 
 .low {
   border-left-color: green;
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.textGroup {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.textGroup h3 {
+  margin: 0.25rem 0;
+  color: black;
+  font-size: 0.95rem;
+}
+
+.textGroup small {
+  color: #999;
+}
+
+.arrowBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
 }

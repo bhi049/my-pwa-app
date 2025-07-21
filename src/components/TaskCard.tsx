@@ -1,6 +1,7 @@
 import React from "react";
 import { Task } from "../types/Task";
 import styles from "../styles/TaskCard.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   task: Task;
@@ -20,6 +21,12 @@ const getPriorityClass = (priority: Task["priority"]) => {
 };
 
 const TaskCard: React.FC<Props> = ({ task }) => {
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    navigate(`/task/${task.id}`);
+  };
+
   const dueDateStr = task.dueDate
     ? new Intl.DateTimeFormat(undefined, {
         dateStyle: "medium",
@@ -29,10 +36,18 @@ const TaskCard: React.FC<Props> = ({ task }) => {
 
   return (
     <div className={`${styles.card} ${getPriorityClass(task.priority)}`}>
-      <h3>{task.title}</h3>
-      {task.description && <p>{task.description}</p>}
-      <small>{dueDateStr}</small>
+      <div className={styles.cardContent}>
+        <div className={styles.textGroup}>
+          <h3>{task.title}</h3>
+          {task.description && <p>{task.description}</p>}
+          <small>{dueDateStr}</small>
+        </div>
+        <button className={styles.arrowBtn} onClick={handleOpen}>
+          ➔
+        </button>
+      </div>
     </div>
+
   );
 };
 
