@@ -1,7 +1,89 @@
 .container {
-  padding: 1rem;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  min-height: 100vh;
 }
 
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin-bottom: 1rem;
+}
+
+.calendarWrapper {
+  background-color: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+/* Base calendar styling */
+.react-calendar {
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  background-color: transparent;
+}
+
+/* Navigation */
+:global(.react-calendar__navigation) {
+  padding: 1rem 1rem 0.6rem;
+  background-color: #fff;
+  font-weight: 500;
+}
+
+:global(.react-calendar__navigation__label) {
+  color: #1c1c1e;
+  font-size: 1.05rem;
+}
+
+:global(.react-calendar__navigation__arrow) {
+  color: #8e8e93;
+  font-size: 1.2rem;
+}
+
+/* Weekday headers */
+:global(.react-calendar__month-view__weekdays__weekday) {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: #8e8e93;
+  padding: 0.6rem 0;
+  font-weight: 500;
+}
+
+/* Days */
+:global(.react-calendar__tile) {
+  padding: 0.6rem 0.4rem;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+  color: #1c1c1e;
+  font-weight: 500;
+}
+
+:global(.react-calendar__tile:hover) {
+  background-color: #f0f0f5;
+  cursor: pointer;
+}
+
+/* Selected Day */
+:global(.react-calendar__tile--active) {
+  background-color: #6bb2ff !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* Today */
+:global(.react-calendar__tile--now) {
+  background-color: #e5e5ea !important;
+  color: #1c1c1e !important;
+  font-weight: 600;
+}
+
+/* Task dot */
 .tile {
   display: flex;
   flex-direction: column;
@@ -10,41 +92,61 @@
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: #2e5bff;
-  margin-top: 2px;
+  background: #007aff;
+  margin-top: 4px;
 }
 
+/* Task dropdown */
 .dropdown {
-  margin-top: 1rem;
-  background: #fafafa;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
 }
 
+.dropdown h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin-bottom: 1rem;
+}
+
+/* Task card */
 .taskCard {
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  background: white;
-  border-left: 4px solid #2e5bff;
-  border-radius: 8px;
+  background-color: #f2f3f5;
+  padding: 1rem;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #007aff;
+}
+
+.taskCard strong {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1c1c1e;
 }
 
 .taskCard p {
-  margin: 0.2rem 0;
+  margin: 0.4rem 0;
+  font-size: 0.9rem;
+  color: #3a3a3c;
 }
 
+/* Priority indicators */
 .low {
-  color: green;
+  color: #34c759;
+  font-weight: 500;
 }
 
 .medium {
-  color: orange;
+  color: #ff9500;
+  font-weight: 500;
 }
 
 .high {
-  color: red;
+  color: #ff3b30;
+  font-weight: 500;
 }

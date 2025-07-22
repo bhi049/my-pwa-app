@@ -44,30 +44,33 @@ const CalendarScreen: React.FC = () => {
     : [];
 
   return (
-    <div className={styles.container}>
-      <h2>Calendar</h2>
-      <Calendar
-        onClickDay={handleDateClick}
-        tileContent={tileContent}
-      />
+<div className={styles.container}>
+  <h2>Calendar</h2>
 
-      {selectedDate && (
-        <div className={styles.dropdown}>
-          <h3>Tasks on {selectedDate.toDateString()}</h3>
-          {tasksForSelectedDate.length === 0 ? (
-            <p>No tasks</p>
-          ) : (
-            tasksForSelectedDate.map((task) => (
-              <div key={task.id} className={styles.taskCard}>
-                <strong>{task.title}</strong>
-                <p>{task.description || "No description"}</p>
-                <span className={styles[task.priority]}>{task.priority}</span>
-              </div>
-            ))
-          )}
-        </div>
+  <div className={styles.calendarWrapper}>
+    <Calendar
+      onClickDay={handleDateClick}
+      tileContent={tileContent}
+    />
+  </div>
+
+  {selectedDate && (
+    <div className={styles.dropdown}>
+      <h3>Tasks on {selectedDate.toDateString()}</h3>
+      {tasksForSelectedDate.length === 0 ? (
+        <p>No tasks</p>
+      ) : (
+        tasksForSelectedDate.map((task) => (
+          <div key={task.id} className={styles.taskCard}>
+            <strong>{task.title}</strong>
+            <p>{task.description || "No description"}</p>
+            <span className={styles[task.priority]}>{task.priority}</span>
+          </div>
+        ))
       )}
     </div>
+  )}
+</div>
   );
 };
 
