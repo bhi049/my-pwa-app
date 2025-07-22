@@ -1,0 +1,50 @@
+.container {
+  padding: 1rem;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2e5bff;
+  margin-top: 2px;
+}
+
+.dropdown {
+  margin-top: 1rem;
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.taskCard {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border-left: 4px solid #2e5bff;
+  border-radius: 8px;
+}
+
+.taskCard p {
+  margin: 0.2rem 0;
+}
+
+.low {
+  color: green;
+}
+
+.medium {
+  color: orange;
+}
+
+.high {
+  color: red;
+}
