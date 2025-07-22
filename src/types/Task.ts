@@ -9,5 +9,4 @@ export interface Task {
   dueDate?: Date;             // Used for calendar export and sorting
   createdAt: Date;            // For sorting, history, syncing
   updatedAt: Date;            // Useful for autosave, sync logic
-  tags?: string[];            // Filter or group by tag
 }

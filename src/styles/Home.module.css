@@ -1,8 +1,6 @@
 .container {
   padding: 1rem;
-  padding-bottom: 4rem;
-  max-width: 600px;
-  margin: 0 auto;
+  padding-bottom: 100px; /* gives room for floating button */
 }
 
 .header {
@@ -10,18 +8,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-}
-
-.addButton {
-  background-color: #007bff;
-  color: white;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .taskList {
@@ -32,6 +18,27 @@
 
 .empty {
   text-align: center;
-  color: #999;
-  margin-top: 2rem;
+  color: #888;
+}
+
+.AddNoteButton {
+  position: fixed;
+  bottom: 70px; /* adjust if navbar is taller */
+  left: 16px;
+  right: 16px;
+  height: 56px;
+  background-color: #2e5bff;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.2s ease;
+}
+
+.AddNoteButton:hover {
+  background-color: #1a44d4;
 }

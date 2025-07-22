@@ -30,7 +30,6 @@ const TaskDetail: React.FC = () => {
       {task.description && <p>{task.description}</p>}
       {task.dueDate && <p><strong>Due:</strong> {task.dueDate.toLocaleString()}</p>}
       <p><strong>Priority:</strong> {task.priority}</p>
-      {task.tags && <p><strong>Tags:</strong> {task.tags.join(", ")}</p>}
 
       <div className={styles.actions}>
         <button className={styles.edit} onClick={handleEdit}>Edit</button>
