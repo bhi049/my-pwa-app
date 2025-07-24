@@ -51,3 +51,18 @@
   color: #666;
   cursor: pointer;
 }
+
+.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.checkBtn {
+  background: none;
+  border: none;
+  color: #4a4a4a;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+}

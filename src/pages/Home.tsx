@@ -31,6 +31,22 @@ const Home: React.FC = () => {
     }, 0);
   };
 
+  const handleToggleComplete = (id: string) => {
+  const updated = tasks.map((task) =>
+    task.id === id
+      ? {
+          ...task,
+          completed: !task.completed,
+          updatedAt: new Date(),
+          completedAt: !task.completed ? new Date() : undefined,
+        }
+      : task
+  );
+  setTasks(updated);
+  saveTasks(updated);
+};
+
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -47,12 +63,12 @@ const Home: React.FC = () => {
         {tasks.length === 0 ? (
           <p className={styles.empty}>No tasks yet</p>
         ) : (
-          tasks.map((task) => <TaskCard key={task.id} task={task} />)
+          tasks.map((task) => <TaskCard key={task.id} task={task} onToggleComplete={handleToggleComplete} />)
         )}
       </div>
 
-      {/* Floationg Add Task Button */}
-<button
+      {/* Floating Add Task Button */}
+      <button
   className={styles.AddNoteButton}
   onClick={handleToggleForm}
   aria-label={showForm ? "Close Form" : "Add Task"}
