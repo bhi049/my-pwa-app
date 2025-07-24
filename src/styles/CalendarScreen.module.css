@@ -170,3 +170,15 @@ h2 {
   font-size: 0.9rem;
   color: #3a3a3c;
 }
+
+.addTaskBtn {
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}

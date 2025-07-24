@@ -5,10 +5,12 @@ import { Task } from "../types/Task";
 import { loadTasks, saveTasks } from "../utils/storage";
 import styles from "../styles/CalendarScreen.module.css";
 import TaskCard from "../components/TaskCard";
+import TaskForm from "../components/TaskForm"; // ✅ import TaskForm
 
 const CalendarScreen: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [showForm, setShowForm] = useState(false); // ✅ toggle form
 
   useEffect(() => {
     const loaded = loadTasks();
@@ -26,6 +28,7 @@ const CalendarScreen: React.FC = () => {
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
+    setShowForm(false); // Close form when selecting a new day
   };
 
   const handleToggleComplete = (id: string) => {
@@ -41,6 +44,13 @@ const CalendarScreen: React.FC = () => {
     );
     setTasks(updated);
     saveTasks(updated);
+  };
+
+  const handleAddTask = (newTask: Task) => {
+    const updated = [...tasks, newTask];
+    setTasks(updated);
+    saveTasks(updated);
+    setShowForm(false);
   };
 
   const renderDot = (date: Date) => {
@@ -83,6 +93,7 @@ const CalendarScreen: React.FC = () => {
               year: "numeric",
             })}
           </h3>
+
           {tasksForSelectedDate.length === 0 ? (
             <p>No tasks</p>
           ) : (
@@ -93,6 +104,17 @@ const CalendarScreen: React.FC = () => {
                 onToggleComplete={handleToggleComplete}
               />
             ))
+          )}
+
+          <button
+            className={styles.addTaskBtn}
+            onClick={() => setShowForm((prev) => !prev)}
+          >
+            {showForm ? "Close Form" : "Add Task"}
+          </button>
+
+          {showForm && (
+            <TaskForm onTaskAdded={handleAddTask} defaultDueDate={selectedDate} />
           )}
         </div>
       )}
