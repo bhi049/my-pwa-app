@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Task } from "../types/Task";
-import { loadTasks } from "../utils/storage";
+import { loadTasks, saveTasks } from "../utils/storage";
 import styles from "../styles/CalendarScreen.module.css";
+import TaskCard from "../components/TaskCard";
 
 const CalendarScreen: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   useEffect(() => {
-    setTasks(loadTasks());
+    const loaded = loadTasks();
+    setTasks(loaded);
+    setSelectedDate(new Date()); // Auto-select today
   }, []);
 
   const tasksByDate = tasks.reduce((acc, task) => {
@@ -25,52 +28,75 @@ const CalendarScreen: React.FC = () => {
     setSelectedDate(date);
   };
 
+  const handleToggleComplete = (id: string) => {
+    const updated = tasks.map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            completed: !task.completed,
+            updatedAt: new Date(),
+            completedAt: !task.completed ? new Date() : undefined,
+          }
+        : task
+    );
+    setTasks(updated);
+    saveTasks(updated);
+  };
+
   const renderDot = (date: Date) => {
     const key = date.toDateString();
-    if (tasksByDate[key]) {
-      return <div className={styles.dot} />;
-    }
-    return null;
+    return tasksByDate[key] ? <div className={styles.dot} /> : null;
   };
 
   const tileContent = ({ date }: { date: Date }) => (
-    <div className={styles.tile}>
-      {renderDot(date)}
-    </div>
+    <div className={styles.tile}>{renderDot(date)}</div>
   );
 
   const tasksForSelectedDate = selectedDate
-    ? tasksByDate[selectedDate.toDateString()] || []
+    ? [...(tasksByDate[selectedDate.toDateString()] || [])].sort((a, b) =>
+        a.dueDate && b.dueDate
+          ? new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+          : 0
+      )
     : [];
 
   return (
-<div className={styles.container}>
-  <h2>Calendar</h2>
+    <div className={styles.container}>
+      <h2>Calendar</h2>
 
-  <div className={styles.calendarWrapper}>
-    <Calendar
-      onClickDay={handleDateClick}
-      tileContent={tileContent}
-    />
-  </div>
+      <div className={styles.calendarWrapper}>
+        <Calendar
+          onClickDay={handleDateClick}
+          tileContent={tileContent}
+          value={selectedDate ?? new Date()}
+        />
+      </div>
 
-  {selectedDate && (
-    <div className={styles.dropdown}>
-      <h3>Tasks on {selectedDate.toDateString()}</h3>
-      {tasksForSelectedDate.length === 0 ? (
-        <p>No tasks</p>
-      ) : (
-        tasksForSelectedDate.map((task) => (
-          <div key={task.id} className={styles.taskCard}>
-            <strong>{task.title}</strong>
-            <p>{task.description || "No description"}</p>
-            <span className={styles[task.priority]}>{task.priority}</span>
-          </div>
-        ))
+      {selectedDate && (
+        <div className={styles.dropdown}>
+          <h3>
+            Tasks on{" "}
+            {selectedDate.toLocaleDateString(undefined, {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </h3>
+          {tasksForSelectedDate.length === 0 ? (
+            <p>No tasks</p>
+          ) : (
+            tasksForSelectedDate.map((task) => (
+              <TaskCard
+                key={task.id}
+                task={task}
+                onToggleComplete={handleToggleComplete}
+              />
+            ))
+          )}
+        </div>
       )}
     </div>
-  )}
-</div>
   );
 };
 
